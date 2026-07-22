@@ -15,15 +15,34 @@
 - 代码审查
 - 多人协作与分支合并
 
-## 安装
+## 快捷安装
 
-将仓库克隆到 Claude Code 的 Skills 目录：
+使用第三方 `skills` CLI 安装到 Claude Code 的用户级 Skills 目录：
 
 ```bash
-git clone https://github.com/shuaimouls/all-in-project-skill-lite.git
+npx skills add shuaimouls/all-in-project-skill-lite --global --agent claude-code --yes
 ```
 
-具体安装位置取决于你的 Claude Code Skills 配置。
+`skills` CLI 由 Vercel Labs 维护，并非 Anthropic 官方工具。Claude Code 目前没有用于安装任意 GitHub Skills 仓库的 `claude skills install` 命令。
+
+## 手动安装
+
+macOS、Linux 或 Git Bash：
+
+```bash
+mkdir -p "$HOME/.claude/skills" && \
+git clone --depth 1 https://github.com/shuaimouls/all-in-project-skill-lite.git \
+  "$HOME/.claude/skills/all-in-project-skill-lite"
+```
+
+Windows PowerShell：
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+git clone --depth 1 https://github.com/shuaimouls/all-in-project-skill-lite.git "$HOME\.claude\skills\all-in-project-skill-lite"
+```
+
+请保留仓库的完整目录结构；根入口依赖各中文子目录中的 `SKILL.md`。
 
 ## 使用示例
 
