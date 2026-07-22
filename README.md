@@ -1,10 +1,12 @@
-# all-in-project-skill-lite（1.4.0）
+# all-in-project-skill-lite（1.5.0）
 
-面向个人、小项目和单仓库多人协作的轻量项目全生命周期 Skill 套件。
+面向个人、小项目和单仓库多人协作的轻量项目全生命周期 Skill。
 
-它提供一个统一入口，根据当前任务路由到项目初始化、开发、需求评估与修改、Bug 修复、跨模块需求协调、重构、代码审查、多人协作、Goal 监工、最小上线评估、版本切分和前端页面/视觉规划等子 Skill。默认采用单人串行流程；跨模块需求协调通过需求包级第 0 层拆解、委派和验收，Goal 模式通过启动时逐项确认的精确授权合同连续推进，并以最短主上下文运行三层 Agent：第 0 层只调度和验收、最多同时委派 2 个第 1 层执行 Agent，每个第 1 层最多同时委派 1 个第 2 层局部 Agent，第 2 层不得继续委派。调用总次数不设预算，但合同外写入、合并、推送、删除或历史改写仍保留明确门禁。
+仓库只暴露一个入口 `SKILL.md`。入口根据完整 `$ARGUMENTS` 分派到 `references/` 中的内部流程规则，覆盖项目初始化、遗留项目接入、开发、需求评估与修改、Bug 修复、跨模块需求协调、重构、代码审查、多人协作、Goal 监工、最小上线评估、版本切分和前端页面/视觉规划。
 
-## 包含的 Skill
+默认采用单人串行流程；跨模块需求协调通过需求包级第 0 层拆解、委派和验收；Goal 模式通过启动时逐项确认的精确授权合同连续推进。合同外写入、合并、推送、删除或历史改写仍保留明确门禁。
+
+## 内部流程
 
 - 项目初始化与遗留项目接入
 - 项目开发
@@ -18,6 +20,36 @@
 - Goal 监工
 - 最小上线标准评估与版本功能分割
 - 前端页面规划与视觉统一
+
+这些是根入口按需加载的内部规则，**不是独立可调用的 skills**。请只调用 `/all-in-project-skill-lite`，不要调用 `/项目开发`、`/Goal监工`，也不要调用 `Skill(项目开发)` 或 `Skill(Goal监工)`。
+
+## 目录结构
+
+```text
+all-in-project-skill-lite/
+├── SKILL.md                         # 唯一公开入口；根据 $ARGUMENTS 路由
+├── README.md
+└── references/                      # 仅供入口通过 Read 加载
+    ├── shared-contract.md
+    ├── goal-monitor.md
+    ├── project-init.md
+    ├── legacy-project-onboarding.md
+    ├── project-development.md
+    ├── requirement-assessment.md
+    ├── requirement-change.md
+    ├── refactor-coordination.md
+    ├── bug-fix.md
+    ├── docs-sync-check.md
+    ├── refactor-opportunity.md
+    ├── code-review.md
+    ├── branch-merge.md
+    ├── multi-agent-collaboration.md
+    ├── multi-requirement-coordination.md
+    ├── minimum-launch-assessment.md
+    ├── version-splitting.md
+    ├── frontend-page-planning.md
+    └── frontend-visual-unification.md
+```
 
 ## 快捷安装
 
@@ -46,11 +78,11 @@ New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
 git clone --depth 1 https://github.com/shuaimouls/all-in-project-skill-lite.git "$HOME\.claude\skills\all-in-project-skill-lite"
 ```
 
-请保留仓库的完整目录结构；根入口依赖各中文子目录中的 `SKILL.md`。
+请保留仓库的完整目录结构：根 `SKILL.md` 依赖 `references/` 内部规则，但只有根入口可被调用。
 
 ## 使用示例
 
-在 Claude Code 中按自然语言描述任务，例如：
+在 Claude Code 中调用 `/all-in-project-skill-lite` 后按自然语言描述任务，例如：
 
 ```text
 先把一个涉及认证、订单和通知的发布需求拆解、排依赖并协调多个 Agent。
@@ -62,4 +94,4 @@ git clone --depth 1 https://github.com/shuaimouls/all-in-project-skill-lite.git 
 检查项目文档与当前实现是否一致，先不要修改。
 ```
 
-入口路由、安全门禁和各子 Skill 的完整说明见 [SKILL.md](SKILL.md)。
+入口路由、安全门禁与内部流程映射见 [SKILL.md](SKILL.md)。
