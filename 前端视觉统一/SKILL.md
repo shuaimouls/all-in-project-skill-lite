@@ -17,7 +17,7 @@ description: "在页面规划确定后，通过三个同内容的离线优先视
 
 ```text
 PREFERENCE → SHARED_BRIEF → PREVIEW_CONFIRM
-→ PARALLEL_BUILD(3) → CHECK → USER_PICK → DECISION_PACKAGE
+→ BUILD_DIRECTIONS(3) → CHECK → USER_PICK → DECISION_PACKAGE
 ```
 
 ## 阶段一：偏好与共享 brief
@@ -34,7 +34,7 @@ PREFERENCE → SHARED_BRIEF → PREVIEW_CONFIRM
 
 ## 阶段二：三个隔离预览
 
-默认派出 3 个互不写入的预览 Agent，各自只写：
+生成 3 个互不写入的预览工作单元，各自只写：
 
 ```text
 agent-output/frontend-visual/<run-id>/direction-a/index.html
@@ -42,7 +42,7 @@ agent-output/frontend-visual/<run-id>/direction-b/index.html
 agent-output/frontend-visual/<run-id>/direction-c/index.html
 ```
 
-每个预览必须是可离线直接打开的自包含页面，使用相同 brief、相同内容和相同视口；只能改变视觉方向。主 Agent 串行检查三个预览后交给用户并排比较。
+每个预览必须是可离线直接打开的自包含页面，使用相同 brief、相同内容和相同视口；只能改变视觉方向。普通模式可按用户确认的资源条件并行生成 3 个方向；Goal 模式由第 0 层最多同时委派 2 个第 1 层预览 Agent，第三个方向在任一槽位释放后再执行，累计仍生成 3 个。检查工作由归属当前 `ACTIVE` skill 的第 1 层 Agent 完成并向第 0 层返回压缩证据，不得由第 0 层读取完整预览实现。
 
 用户选择前：
 
