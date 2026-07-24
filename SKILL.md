@@ -3,7 +3,7 @@ name: all-in-project-skill-lite
 description: "面向个人、小项目及单仓库多人协作的轻量全生命周期入口。根据完整 $ARGUMENTS 路由至内部 references 规则；默认单人串行，按需协调多人、跨模块需求与 Goal 推进，并保留严格用户决策和安全门禁。"
 ---
 
-# 项目全生命周期 Skill 入口（1.5.0 lite）
+# 项目全生命周期 Skill 入口（1.6.0 lite）
 
 本文件是唯一可调用的 skill 入口。它不直接执行项目操作：根据完整 `$ARGUMENTS` 选择内部流程，并用 `Read` 加载相应的 `references/*.md` 规则。
 
@@ -58,6 +58,7 @@ Goal 读取后必须按其启动合同确认精确动作、对象、范围和禁
 | 未知哪里值得改，需要只读扫描 | `references/refactor-opportunity.md` |
 | 明确错误行为或缺陷 | `references/bug-fix.md` |
 | 只想检查文档/实现漂移 | `references/docs-sync-check.md` |
+| 旧版约定或骨架化文档要按新约定迁移 | `references/stale-docs-update.md` |
 | 明确工作区、提交、分支或 PR 审查对象 | `references/code-review.md` |
 | 用户已选择精确源分支和目标分支 | `references/branch-merge.md` |
 | 一次跨模块需求包，需要拆解、排依赖或协调 Agent | `references/multi-requirement-coordination.md` |
@@ -82,6 +83,7 @@ Goal 读取后必须按其启动合同确认精确动作、对象、范围和禁
 - “把 `feature/auth` 合到 `develop`，先只做预检。” → `references/branch-merge.md`
 - “登录接口 500，按 Bug 流程修复。” → `references/bug-fix.md`
 - “检查文档和代码是否同步，先不要改。” → `references/docs-sync-check.md`
+- “这是旧版 skill 生成的项目，把文档按新约定更新。” → `references/stale-docs-update.md`
 - “文档都齐了，自动推进当前版本直到完成。” → `references/goal-monitor.md`
 
 ## 边界
@@ -89,7 +91,9 @@ Goal 读取后必须按其启动合同确认精确动作、对象、范围和禁
 - 多分支不等于自动启用多人协作；先确认。
 - 多模块需求不等于自动进入 Goal 或多人协作；先判断是一次需求包、目标版本还是分支队列。
 - 不默认目标分支为 `main`；读取仓库事实并让用户确认。
-- 审查通过不自动授权合并或 push；三者是独立门禁。
+- 审查通过不自动授权合并或 push；三者是独立门禁。《代码审查》按 L0/L1/L2 分级执行，已有有效结论不重复审查。
 - 不得在未选择视觉方向时写入正式组件或页面。
 - Goal 合同不得扩展到未列出的文件、分支、版本或外部系统。
 - 不得为了最快上线延期安全、权限、数据完整性、合规或最低验证。
+- 文档落盘即完整：任何流程不得写入含"待补充/后续完善/TODO/略/占位"或模板残留的文档；先骨架后补不是合法路径。
+- 同一信息只写一处：接口定义在各 vault，版本归属在进度表，其余位置只用指针；每轮任务后强制更新的文档不超过 1 处。

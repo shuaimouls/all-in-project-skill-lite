@@ -1,4 +1,4 @@
-# all-in-project-skill-lite（1.5.0）
+# all-in-project-skill-lite（1.6.0）
 
 面向个人、小项目和单仓库多人协作的轻量项目全生命周期 Skill。
 
@@ -14,7 +14,8 @@
 - Bug 修复
 - 重构协调与重构机会寻找
 - 文档与项目同步检查
-- 代码审查
+- 陈旧项目文档更新（旧约定/骨架化文档迁移到新约定）
+- 代码审查（按 L0/L1/L2 改动风险分级）
 - 多人协作与分支合并
 - 多需求协调
 - Goal 监工
@@ -43,6 +44,7 @@ all-in-project-skill-lite/
     ├── refactor-opportunity.md
     ├── code-review.md
     ├── branch-merge.md
+    ├── stale-docs-update.md
     ├── multi-agent-collaboration.md
     ├── multi-requirement-coordination.md
     ├── minimum-launch-assessment.md
@@ -92,6 +94,7 @@ git clone --depth 1 https://github.com/shuaimouls/all-in-project-skill-lite.git 
 审查 feature/auth 相对 develop 的改动。
 登录接口返回 500，按 Bug 修复流程处理。
 检查项目文档与当前实现是否一致，先不要修改。
+这是旧版 skill 生成的项目，把文档按新约定更新。
 ```
 
 入口路由、安全门禁与内部流程映射见 [SKILL.md](SKILL.md)。
